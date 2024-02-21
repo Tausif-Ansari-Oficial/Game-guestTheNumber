@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest The Number</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Riot&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: "Protest Guerrilla", sans-serif !important;
+            font-weight: 400;
+
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 300px;
+
+            margin: 0 auto;
+            background: linear-gradient(to right, #003047, #007bff);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        #input {
+            font-size: 16px;
+            font-family: sans-serif;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        button {
+            font-size: 16px;
+            font-family: sans-serif;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #f1c40f;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #f3b32c;
+        }
+
+        .msg {
+            font-size: 14px;
+            font-family: sans-serif;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .attempts {
+            font-size: 12px;
+            font-family: sans-serif;
+            color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="text" name="input" id="input">
+        <button>Check</button>
+        <p><b class="msg"></b></p>
+        <p class="attempts"></p>
+    </div>
+
+    <script>
+
+        let ans = parseInt(Math.floor(Math.random() * 100) + 1)
+        let button = document.querySelector('button')
+        let msg = document.querySelector('.msg')
+        let attempts = document.querySelector('.attempts')
+
+        let chance = 5
+
+        button.addEventListener('click', () => {
+            checkWinner()
+        })
+
+        const checkWinner = () => {
+            let inp = parseInt(document.querySelector('input').value)
+            console.log(parseInt(inp));
+
+            chance == 0 ? attempts.textContent = ans : attempts.textContent = chance
+            if (isNaN(inp) || inp > 100 || inp < 0) {
+                return msg.textContent = "Enter Valid Number"
+            } else if (chance == 0) {
+                msg.textContent = "Over"
+                return button.disabled = true
+            } else if (inp == ans) {
+                return msg.textContent = "You win"
+            } else if (inp > ans) {
+                msg.textContent = "Bigger then Answer"
+                return chance--
+            } else if (inp < ans) {
+                msg.textContent = "Smaller then Answer"
+                return chance--
+            }
+            // return chance
+        }
+    </script>
+</body>
+
+</html>
